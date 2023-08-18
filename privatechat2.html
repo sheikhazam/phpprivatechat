@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Secure WebSocket Example</title>
+</head>
+
+<body>
+    <script>
+        const socket = new WebSocket('wss://34.147.172.39:8089');
+
+        socket.addEventListener('open', (event) => {
+            console.log('WebSocket connection opened.');
+            // You can start sending and receiving messages here.
+        });
+
+        socket.addEventListener('message', (event) => {
+            console.log('Received message:', event.data);
+            // Handle the received message.
+        });
+
+        socket.addEventListener('close', (event) => {
+            console.log('WebSocket connection closed.');
+            // Handle the closed connection.
+        });
+
+        // Handle errors, if any.
+        socket.addEventListener('error', (error) => {
+            console.error('WebSocket error:', error);
+            // Handle the error.
+        });
+
+        // Function to send messages.
+        function sendMessage(message) {
+            if (socket.readyState === WebSocket.OPEN) {
+                socket.send(message);
+            } else {
+                console.warn('WebSocket not open. Message not sent.');
+            }
+        }
+
+        // Call sendMessage('your message') to send a message.
+    </script>
+</body>
+
+</html>
